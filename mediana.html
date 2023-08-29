@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 500px;
+            background-color: #215732;
+            height: 250px;
+            box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); 
+            -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        }
+        div input{
+            width:200px;
+        }
+        div label {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            color: white;
+        }
+        div button{
+            margin-top: 10px;
+            width: 200px;
+            height: 30px;
+        }
+        div #calcular{
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div>
+            <label for="valores">Digite sus valores</label>
+            <input type="text" id="valores">
+            
+            <label for="promedio"></label>
+            <input type="text" id="promedio">
+            <button id="calcular">Calcular promedio</button>
+            
+            <button id="result"></button>
+        </div>
+    </main>
+
+    
+</body>
+<script src="./mediana.js"></script>
+</html>

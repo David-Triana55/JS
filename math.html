@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math</title>
+    <style>
+        main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        main button{
+            width: 300px;
+            height: 30px;
+            border: 1px solid rgba(0,0,0,0.5);
+            border-radius: 5px;
+            background-color: rgba(255,255,255,0.5);
+            color: rgba(0,0,0,0.5);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: 3s ;
+            transition: transform 3s;
+        }
+        button:hover{
+            transform: translate(3px,5px);
+            transition: transform 3s;
+        }
+        button a{
+            text-decoration: none;
+            color: black;
+        }
+        div{
+            min-width:500px;
+            height: 300px;
+            border: 1px solid black;
+            border-radius: 10px;
+            background-color: azure;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); 
+            -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <main>
+        <div>
+            <h1>ten tus resultados de descuento</h1>
+            <button>
+                <a href="./promedio.html">Aqui!</a>
+            </button> 
+            <h1>ten tu resultado de mediana</h1>
+            <button>
+                <a href="./mediana.html">Aqui!</a>
+            </button> 
+        </div>
+            
+        </main>
+        
+</body>
+<script src="./math.js"></script>
+</html>
