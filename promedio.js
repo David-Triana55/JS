@@ -1,9 +1,9 @@
-const boton = document.getElementById("calcular")
-const inputPrice = document.getElementById("producto")
-const inputCupon = document.getElementById("cupon")
-let parrafo = document.getElementById("result")
+// ? const boton = document.getElementById("calcular")
+// todo const inputPrice = document.getElementById("producto")
+// ! const inputCupon = document.getElementById("cupon")
+// let parrafo = document.getElementById("result")
 
-boton.addEventListener("click", promedio)
+// boton.addEventListener("click", promedio)
 
 function promedio(){
     // p * (100 - D) / 100
@@ -32,6 +32,10 @@ function promedio(){
         nombre: "david_gomez",
         descuento: 25
     })
+
+    cuponList.push(10)
+
+    console.log(cuponList[2])
 
 
     const arrayCupones = cuponList.find(cupones)
