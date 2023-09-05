@@ -14,10 +14,8 @@ const FuncionesMath = {
 }
 
 FuncionesMath.ordenarLista = function ordenarLista(listaDesordenada) {
-    let lista = listaDesordenada.sort(function(a, b) {
-        return a - b
-    })
-    return lista
+    
+    return listaDesordenada.sort((a, b) =>  a - b)
 }
 
 FuncionesMath.calcularPromedio = function calcularPromedio(lista) {
@@ -63,7 +61,6 @@ FuncionesMath.calcularMediana = function calcularMediana (listaDesordenada) {
 
         // como los array empiezan en 0 la mitad vendria dando un numero impar y ese sería la mediana
         
-        console.log(indexMitadListaImpar);
         
         return medianaListaImpar;
     }    

@@ -32,7 +32,7 @@ console.log({
     areaTriangulo,
 })
 
-function triangulo (lado1 = 2, lado2 = 3, base = 4, altura = 5) {
+function triangulo (lado1, lado2, base, altura) {
     return {
         perimetro: lado1 + lado2 + base,
         area: (base * altura) / 2
