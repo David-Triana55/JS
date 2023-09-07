@@ -113,7 +113,7 @@ function proyeccionPorEmpresa(nombre) {
             porcentajesCrecimiento.push(porcentajeCrecimiento)
         }
 
-        const medianaPorcentajesCrecimiento = PlatziMath.calcularMediana(porcentajesCrecimiento);
+        const medianaPorcentajesCrecimiento = FuncionesMath.calcularMediana(porcentajesCrecimiento);
 
         const ultimaMediana = listaMedianaYears[listaMedianaYears.length - 1];
 
