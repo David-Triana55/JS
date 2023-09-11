@@ -61,19 +61,36 @@ function proyeccionPorPersona(nombrePersona) {
 
 const empresas = {}
 
+
 for (persona of salarios) { // usamos la variable persona para recorrer el array de salarios
     for(trabajo of persona.trabajos) { // usamos la variable trabajo para recorrer el array de persona.trabajos
         if (!empresas[trabajo.empresa]) { // si no existe entonces
             empresas[trabajo.empresa] = {}   //  crea un objeto con el nombre de la empresa
         }
 
-        if (!empresas[trabajo.empresa] [trabajo.year]) { // si no existe entonces
-            empresas[trabajo.empresa] [trabajo.year] = [] // crea un arreglo con el año de la empresa
+        if (!empresas[trabajo.empresa][trabajo.year]) { // si no existe entonces
+            empresas[trabajo.empresa][trabajo.year] = [] // crea un arreglo con el año de la empresa
         }
 
         empresas[trabajo.empresa][trabajo.year].push(trabajo.salario) // empuja los salario al array vacio de la empresa del año
     }
 }
+
+// ? for normal 
+
+// for (let i = 0; i < salarios.length; i++) {
+//     const persona = salarios[i];
+//     for (let j = 0; j < persona.trabajos.length; j++) {
+//         const trabajo = persona.trabajos[j];
+//         if (!empresas[trabajo.empresa]) {
+//             empresas[trabajo.empresa] = {};
+//         }
+//         if (!empresas[trabajo.empresa] [trabajo.year]) {
+//             empresas[trabajo.empresa][trabajo.year] = [];
+//         }
+//         empresas[trabajo.empresa][trabajo.year].push(trabajo.salario);
+//     }
+// }
 
 console.log(empresas)
 
@@ -87,10 +104,9 @@ function medianaEmpresaYear(nombre, year) {
     }
 }
 
-
 function proyeccionPorEmpresa(nombre) {
     if (!empresas[nombre]) { // si empresa no existe entonces:
-    console.warn('La empresa no existe');
+        console.warn('La empresa no existe');
     } else {
         const empresaYears = Object.keys(empresas[nombre]);
 
@@ -112,8 +128,7 @@ function proyeccionPorEmpresa(nombre) {
             
             porcentajesCrecimiento.push(porcentajeCrecimiento)
         }
-
-        const medianaPorcentajesCrecimiento = PlatziMath.calcularMediana(porcentajesCrecimiento);
+        const medianaPorcentajesCrecimiento = FuncionesMath.calcularMediana(porcentajesCrecimiento);
 
         const ultimaMediana = listaMedianaYears[listaMedianaYears.length - 1];
 
@@ -123,4 +138,28 @@ function proyeccionPorEmpresa(nombre) {
 
         return nuevoMediana;
     }
+}
+
+// Analisis general
+
+function medianaGeneral() {
+    const listaMediana = salarios.map( 
+        (persona) => medianaPorPersona(persona.name)
+    )
+
+    const medianaOrdenadas = FuncionesMath.ordenarLista(listaMediana)
+
+    const cantidad = listaMediana.length / 10;
+
+    const limite = listaMediana.length - cantidad;
+
+    const top10 = medianaOrdenadas.slice(limite, medianaOrdenadas.length);
+
+    // slice solo copia
+    // splice quita del arreglo original
+
+    const medianaTop10 = FuncionesMath.calcularMediana(top10)
+
+    return medianaTop10
+
 }
