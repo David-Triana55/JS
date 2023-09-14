@@ -46,7 +46,6 @@ button:not(:last-child){
 .message{
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
     width: 80%;
     max-width: 460px;
 }
@@ -61,7 +60,8 @@ p{
     button { 
         margin-top: 25px;
     }
-    #up,#down { margin-left: 100%; 
+    #up,#down { 
+        margin-left: 100%; 
         margin-right:100%; 
     }
 }
