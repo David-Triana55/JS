@@ -8,6 +8,7 @@ const spanLives = document.querySelector('#lives');
 const spanTimes = document.querySelector('#time');
 const spanRecord = document.querySelector('#Record');
 const pResult = document.querySelector('#result');
+const btnReinicio = document.querySelector("#Reiniciar")
 
 let canvasSize;
 let elementsSize;
@@ -27,6 +28,9 @@ const giftPosition = {
     y: undefined,
 };
 let enemyPositions = [];
+
+btnReinicio.addEventListener('click', reinciarGame)
+
 
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
@@ -155,6 +159,11 @@ function levelWin() {
     startGame();
 }
 
+
+function reinciarGame() {
+    location.reload();
+}
+
 function levelFail() {
     console.log('Chocaste contra un enemigo :(');
     lives--;
@@ -190,6 +199,7 @@ function gameWin() {
     }
 
     console.log({recordTime, playerTime});
+    reinciarGame()
 }
 
 function showLives() {
