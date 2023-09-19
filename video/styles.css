@@ -62,11 +62,17 @@ p{
 }
 
 @media (max-width: 640px){
+    .btns{
+        margin-top: -240px;
+    }
     button { 
         margin-top: 5px;
     }
     #up,#down { 
         margin-left: 100%; 
         margin-right:100%; 
+    }
+    .messages{
+        margin-top: -472px;
     }
 }
