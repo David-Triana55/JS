@@ -3,7 +3,7 @@ nombre: "david",
 edad: 18,
 } 
 
-const array = [1, 2, 3, 4]
+const array = [1, 2, 3, "d"]
 
 array.push("perro hpta")
 array.pop()
