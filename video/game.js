@@ -31,9 +31,10 @@ let enemyPositions = [];
 
 btnReinicio.addEventListener('click', reinciarGame)
 
-
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
+
+// ajustamos el width y el height de canvas
 
 function setCanvasSize() {
     if (window.innerHeight > window.innerWidth) {
@@ -41,12 +42,10 @@ function setCanvasSize() {
     } else {
         canvasSize = window.innerHeight * 0.75;
     }
-
     canvasSize = Number(canvasSize.toFixed(0))
 
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
-
 
     elementsSize = canvasSize / 10;
 
@@ -131,6 +130,8 @@ function startGame() {
     movePlayer();
 }
 
+// movimientos del judor y colision
+
 function movePlayer() {
     const giftCollisionX = playerPosition.x.toFixed(2) == giftPosition.x.toFixed(2);
     const giftCollisionY = playerPosition.y.toFixed(2) == giftPosition.y.toFixed(2);
@@ -149,9 +150,10 @@ function movePlayer() {
     if (enemyCollision) {
         levelFail();
     }
-
     game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
+
+// pasar de nivel
 
 function levelWin() {
     console.log('Subiste de nivel');
@@ -159,10 +161,13 @@ function levelWin() {
     startGame();
 }
 
+// jugar de nuevo
 
 function reinciarGame() {
     location.reload();
 }
+
+// sin vidas
 
 function levelFail() {
     console.log('Chocaste contra un enemigo :(');
@@ -173,11 +178,12 @@ function levelFail() {
         lives = 3;
         timeStart = undefined;
     }
-
     playerPosition.x = undefined;
     playerPosition.y = undefined;
     startGame();
 }
+
+// victoria del juego
 
 function gameWin() {
     console.log('¡Terminaste el juego!');
@@ -197,9 +203,10 @@ function gameWin() {
         localStorage.setItem("record_time", playerTime)
         pResult.innerHTML = "primer record, intenta superarlo!"
     }
-
     console.log({recordTime, playerTime});
 }
+
+// mostrar vidas restantes
 
 function showLives() {
     const heartsArray = Array(lives).fill(emojis['HEART']); // [1,2,3]
@@ -209,9 +216,13 @@ function showLives() {
     heartsArray.forEach(heart => spanLives.append(heart));
 }
 
+// mostrar tiempo de juego 
+
 function showTime() {
     spanTimes.innerHTML = Date.now() - timeStart
 }
+
+// mostrar record anterior
 
 function showRecord() {
     spanRecord.innerHTML = localStorage.getItem("record_time")
@@ -229,6 +240,7 @@ function moveByKeys(event) {
     else if (event.key == 'ArrowRight') moveRight();
     else if (event.key == 'ArrowDown') moveDown();
 }
+
 function moveUp() {
     console.log('Me quiero mover hacia arriba');
 
@@ -239,6 +251,7 @@ function moveUp() {
         startGame();
     }
 }
+
 function moveLeft() {
     console.log('Me quiero mover hacia izquierda');
 
@@ -249,6 +262,7 @@ function moveLeft() {
         startGame();
     }
 }
+
 function moveRight() {
     console.log('Me quiero mover hacia derecha');
 
@@ -259,6 +273,7 @@ function moveRight() {
         startGame();
     }
 }
+
 function moveDown() {
     console.log('Me quiero mover hacia abajo');
 
