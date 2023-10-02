@@ -1,5 +1,5 @@
 class Comment {
-    constructor({content,studentName, studentRole = "estudiante"}) {
+    constructor({content, studentName, studentRole = "estudiante"}) {
         this.content = content;
         this.studentName = studentName;
         this.studentRole = studentRole;
@@ -13,17 +13,7 @@ class Comment {
     }
 }
 
-function videoPlay(id) {
-    const url = "http://video.secretop.com" + id
-    console.log("se esta reproduciendo video " + url);
-}
-
-function pauseVideo(id) {
-    const url = "http://video.secretop.com" + id
-    console.log("pause video " + url);
-}
-
-class DavidClass {
+export class DavidClass {
     constructor({name, video,}) {
         this.name = name;
         this.video = video;
@@ -36,37 +26,56 @@ class DavidClass {
     pausar() {
         pauseVideo(this.video)
     }
-
 }
+
+function videoPlay(id) {
+    const url = "http://video.secretop.com" + id
+    console.log("se esta reproduciendo video " + url);
+}
+
+function pauseVideo(id) {
+    const url = "http://video.secretop.com" + id
+    console.log("pause video " + url);
+}
+
 // !   _________________cursos________________________________________________________________
 
 // # hace los campos privados en las clases
-class Course{
+class Course {
     #name
     constructor({name,classes=[],isFree = false, lang = "spanish"}){
         this.#name = name;
         this.classes = classes;
         this.isFree = isFree;
         this.lang = lang; 
-
     } 
-    get name(){ // obtiene el nombre
+
+    get name() { // obtiene el nombre
         return this.#name;
     }
-    set name(nuevoNombrecito){ // modificar el nombre 
-        if(nuevoNombrecito==="Curso Malito de Programación Básica"){
+
+    set name(nuevoNombrecito) { // modificar el nombre 
+        if (nuevoNombrecito === "Curso Malito de Programación Básica"){
             console.error("Web... no");
-        }else{
+        } else {
             this.#name = nuevoNombrecito;
         }
     }
 }
 
-const cursoProgBasica = new Course({name:"Curso Gratis de Programación Básica", isFree: true})
+const cursoProgBasica = new Course({
+    name:"Curso Gratis de Programación Básica", 
+    isFree: true
+})
 
-const cursoDefinitivoHTML = new Course({name:"Curso Definitivo de HTML y CSS", lang: "english"})
+const cursoDefinitivoHTML = new Course({
+    name:"Curso Definitivo de HTML y CSS",
+    lang: "english"
+})
 
-const cursoPracticoHTML=new Course({name:"Curso Practico de HTML y CSS",});
+const cursoPracticoHTML=new Course({
+    name:"Curso Practico de HTML y CSS"
+});
 
 // ! ____________________________ruta aprendizaje________________________________________________________________
 
@@ -115,7 +124,6 @@ class Student {
         })
 
         comment.publicar()
-
     }
 }
 
@@ -183,10 +191,11 @@ const fredy = new TeacherStudent({
     name: "Fredy",
     username: "Fredier",
     email: "fred@fredy.com",
-    instagram: "fredier"
+    instagram: "fredier",
 });
 
-juan2 
+fredy.publicarComent("hello")
+
 const juan2 = new freeStudent({
     name: "JuanDC",
     username: "juandc",
@@ -203,14 +212,13 @@ const dabid = new BasicStudent({
     username: "daveCode",
     email: "david@gmail.com",
     instagram: "david_triana55",
-    approvedCourses: cursoProgBasica.name,
     learningPaths: [
         escuelaData.name, escuelaData.courses,
         escuelaWeb.name, escuelaWeb.courses
-    ]
+    ],
 })
 
-console.log(juan2.approveCourse(cursoDefinitivoHTML))
+console.log(juan2.approveCourse(cursoProgBasica))
 
 const miguelito2 = new ExpertStudent({
 

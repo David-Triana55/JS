@@ -1,32 +1,40 @@
-const obj = {
-nombre: "david",
-edad: 18,
-} 
+class david {
+    constructor({ name, age,ahorros, id,novia = false, madre, padre}) {
+        this.name = name;
+        this.age = age;
+        this.ahorros = ahorros;
+        this.id = id;
+        this.padre = padre;
+        this.novia = novia;
+        this.madre = madre;
+    }
 
-let numero1 = 5
-let numero2 = 3
-
-
-let suma
-let resta
-let division
-
-function sumar () {
-    suma = numero1 + numero2
-}
-
-class Perro {
-    constructor(nombre, edad, numero) {
-        this.nombre = nombre
-        this.edad = edad
-        this.numero = numero
+    miNovia(name){
+        if (name == "Angie") {
+            console.log("si es tu novia");
+        } else {
+            console.log("no es tu novia");
+        }
     }
 }
 
+const persona = new david({
+    name: "david",
+    age: "18",
+    ahorros: "20.000",
+    id: 1032677756,
+    padre: true,
+    madre: true,
+    novia: "Angie",
+})
 
-let perro2 = new Perro("juanito",10, 2)
+console.log(persona);
 
-console.log(perro2.nombre)
 
-perro2.nombre
+persona.miNovia(persona.novia)
 
+
+// abstraccion es abstraer los detalles de un objeto
+// herencia conserva el constructor de la clase extendida asi reutilizamos codigo
+// polimosfismo el polimorfismo se manifiesta a través de la capacidad de los objetos de diferentes clases para responder a la misma llamada de método.
+// encapsulamiento es la ocultar los detalles internos de un objeto, getters y setters

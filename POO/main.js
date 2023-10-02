@@ -52,4 +52,7 @@ const migue = new Student2({
     email: "migue@gmail.com",
     name: "migue",
     age: 28,
+    cursosAprobados: ["github"]
 })
+
+console.log(migue);
