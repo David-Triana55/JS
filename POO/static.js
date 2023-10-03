@@ -356,6 +356,7 @@ For … in => devuelve los indices o las llaves del array u objeto que esta sien
 
 // ! instance of
 
+// nos arroja true o false si una instancia es de un prototipo en especifico
 
 function LearningPath({
 	name = error("name"), // Campo es obligatorio
@@ -367,28 +368,46 @@ function LearningPath({
 	
 }
 
-
 function Student({
-    name = error("name"),  // argumentos obligatorios, por defecto
-    age = error("age"),
+    name = error("name"),
     email = error("email"),
+    age,
     twitter,
     instagram,
     facebook,
-    approveCourses = [],
+    approvedCourses = [],
     learningPaths = [],
 } = {}) {
-
     this.name = name;
-    this.age = age;
     this.email = email;
+    this.age = age;
+    this.approvedCourses = approvedCourses;
     this.socialMedia = {
         twitter,
         instagram,
         facebook,
+    };
+
+    if (isArray(learningPaths)) {
+        this.learningPaths = [];
+
+        for (learningPathIndex in learningPaths) {
+            if (learningPaths[learningPathIndex] instanceof LearningPath) {
+                this.learningPaths.push(learningPaths[learningPathIndex]);
+            }
+        }
     }
-    this.approveCourses = approveCourses;
-    this.learningPaths = learningPaths;
-    
-    return public
 }
+
+
+const escuelaWeb = new LearningPath({ name: "Escuela de WebDev" });
+const escuelaData = new LearningPath({ name: "Escuela de Data Science" });
+const juan = new Student({
+    email: "juanito@frijoles.co",
+    name: "Juanito",
+    learningPaths: [
+    escuelaWeb,
+    escuelaData,
+    ],
+});
+
