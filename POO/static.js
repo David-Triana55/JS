@@ -17,11 +17,11 @@ const david = {
 // ! metodos estaticos del prototipo object
 
 console.log(Object.keys(david)); // hace un array con solo las llaves
-console.log(Object.getOwnPropertyNames(david)); // se usa para obtener las propiedades enumerables
-console.log(Object.entries(david)); // hace array de arrays
+console.log(Object.getOwnPropertyNames(david)); // se usa para obtener las propiedades enumerables que estan ocultas
+console.log(Object.entries(david)); // hace array de arrays con las llaves y valores
 console.log(Object.getOwnPropertyDescriptors(david));  // nos muestra propiedades del objeto
 
-// ? primero definimos la instancia, el nombre de la llave y si despues las demas propiedades
+// ? primero definimos la instancia, el nombre de la llave y si despues las demas propiedadess
 
 console.log(Object.defineProperty(david, "navigator", {  //
     value: "chrome",
@@ -317,7 +317,6 @@ function createStudent({
     return public
 }
 
-
 function createLearningPath({
 	name = error("name"), // Campo es obligatorio
 	courses = [], // Lista de Cursos que pertencen a la ruta de aprendizaje
@@ -344,8 +343,6 @@ function createLearningPath({
 		get courses() {
 			return private["_courses"];
 		},
-
-        
 	}
 
     return public;
@@ -391,8 +388,6 @@ function LearningPath({
 }) {
     this.name = name;
     this.courses = courses;
-
-	
 }
 
 function Student({
@@ -430,18 +425,16 @@ function Student({
                 console.warn("Alguno de los LPS no es una instancia del prototipo LearningPath");
             }
         }
-
     })
 
     if (isArray(learningPaths)) {
         this.learningPaths = [];
 
         for (learningPathIndex in learningPaths) {
-                this.learningPaths = (learningPaths[learningPathIndex]);
+            this.learningPaths = (learningPaths[learningPathIndex]);
         }
     }
 }
-
 
 const escuelaWeb = new LearningPath({ name: "Escuela de WebDev" });
 const escuelaData = new LearningPath({ name: "Escuela de Data Science" });
@@ -457,37 +450,36 @@ const juan = new Student({
 
 function SuperObject () {}
 SuperObject.isObject = function (subject) {
-        return typeof subject === "object"
-    }
+    return typeof subject === "object"
+}
 
 
 SuperObject.deepCopy = function (subject) {
-        let copySubject
+    let copySubject
     
-        const subjectIsObject = isObject(subject)
-        const subjectIsArray = isArray(subject)
+    const subjectIsObject = isObject(subject)
+    const subjectIsArray = isArray(subject)
         
-        if(subjectIsArray) {
-            copySubject = []
-        } else if (subjectIsObject){
-            copySubject = {}
+    if(subjectIsArray) {
+        copySubject = []
+    } else if (subjectIsObject){
+        copySubject = {}
+    } else {
+        return subject
+    }
+    
+    for(item in subject) {
+        const keyIsObject = isObject(subject[item])
+
+        if(keyIsObject) {
+            copySubject[item] = deepCopy(subject[item])
         } else {
-            return subject
-        }
-    
-        for(item in subject) {
-            const keyIsObject = isObject(subject[item])
-    
-            if(keyIsObject) {
-                copySubject[item] = deepCopy(subject[item])
+            if(subjectIsArray) {
+                copySubject.push(subject[item])
             } else {
-                if(subjectIsArray) {
-                    copySubject.push(subject[item])
-                } else {
-                    copySubject[item] = subject[item]
-                }
+                copySubject[item] = subject[item]
             }
         }
-        return copySubject
     }
-
+    return copySubject
+}
