@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const products = [ 
+            { title: "burger", price: 200},
+            {title: "pizza", price: 20},
+            {title: "Sandwich", price: 40} 
+            
+        ]
+        const app = document.getElementById("app"); 
+
+        // -----------------ForEach--------------------------------------------------------
+
+        // products.forEach(element => {
+        //    app.innerHTML += `<li> el producto es: ${element.title} y el precio es de $${element.price}</li>`
+        // }) 
+
+        // -----------------Map--------------------------------------------------------
+
+        const li = products.map(product => {
+            return `<li> el producto es: ${product.title} y el precio es de $${product.price}</li>`
+        })
+
+        app.innerHTML = li.join("")
+
+    </script>
+</body>
+</html>
