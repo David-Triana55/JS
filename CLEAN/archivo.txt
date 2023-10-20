@@ -1,0 +1,92 @@
+#Tipos de deuda técnica:
+
+-Imprudente y deliberada -> Se da cuando el desarrollador actua de manera consciente e -imprudente, ya que no toma cuenta el factor del error en el código.
+
+-Imprudente e inadvertida -> No se sabe que se esta dejando un error ya que no se posee los conocimientos
+
+-Prudente y deliberada -> Se tiene el 100% de consciencia que se esta dejando la deuda y se tiene la promesa que se va a pagar.
+
+-Prudente e inadvertida -> Es la mas comun, se obtiene cuando se tiene la idea que el desarrollo es el mas eficiente pero se llega a discusión que se podia realizar ciertas mejoras
+
+#¿Cómo pagar las deudas?
+
+-Refactorización -> Es el proceso el cual se pagan las deudas.
+
+-Refactorizando el código, esto es mejorar el código sin alterar su comportamiento para que sea mas entendible y tolerante a cambios.
+
+Y es importante que el código tenga tests ( units o integration tests ) automáticos que validen el comportamiento del código.
+
+
+#¿Cuándo refactorizar?
+
+-Cuando hay código de baja calidad ( duplicación de código, funciones con mas de una acción)
+-Se detecta cualquier otro tipo de code smell ( código duplicado, métodos o clases demasiado grandes y complejos, falta de cohesión entre diferentes partes del código, uso excesivo de condicionales y bucles anidados, por ej.)
+Se debe tener test de código 
+
+
+
+
+#Cómo nombrar variables, funciones y clases según su tipo de dato. 
+
+-Arrays: lista de elementos, generalmento del mismo tipo._________________________
+Se recomienda usar el nombre de la variable en plural.
+const userNames = ["Alex", "Mariana", "Jessica"];
+
+
+
+Booleans: solo tiene 2 valores, true o false._________________________________
+
+-Se recomienda utilizar ciertos prefijos para identificar las variables: is(¿es?), has(¿tiene?), can(¿puede?).
+
+const isValid = true;
+const canRead = false;
+const hasColor = true;
+
+
+
+Numbers________________________________________________________________________
+
+-Se recomienda prefijos que hagan referencia a que la variable contiene números como: max, min y total; son autodescriptivas y también hablan de lo que hace el código.
+
+const maxUsers = 50;
+const minUsers = 10;
+const totalUsers = 15;
+
+
+
+Funciones: representan una acción._____________________________________________
+
+-Se recomienda que inicien con un verbo, seguido de un sustantivo, por ejemplo: get como verbo y name como sustantivo.
+
+-Deben ser concisos y estar en camelCase.
+
+Recomendado:
+    createUser();
+    updateUser();
+    sendEmail();
+
+
+
+
+Funciones de acceso, modificación o predicado.__________________________________
+
+-Se recomienda añadir el prefijo de get, set o is.
+
+Ejemplo:
+    getUser();
+    setUser();
+    isValidUser();
+
+
+
+
+Clases___________________________________________________________________________
+
+-Para nombrar clases se recomienda utilizar sustantivos, por ejemplo: user o userProfile, pero se debe evitar utilizar nombres genéricos como: data o manager, porque esto puede llevar a que estas clases tengan más de una sola responsabilidad.
+
+-Según el principio de responsabilidad único tanto una clase como una función deben ser responsables de una sola acción.
+
+Recomendado:
+    class User {}
+    class UserProfile {}
+    class Account {}
