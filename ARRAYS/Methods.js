@@ -352,9 +352,14 @@ array.splice(índice, cantidad, item1, item2, ..., itemN)
 
 El método splice recibe tres argumentos:
 
-El índice donde comenzará a cambiar el array.    
-La cantidad de elementos que serán reemplazados.  
-Uno o varios elementos que reemplazarán a los originales del array.  
+El método splice() en JavaScript se utiliza para modificar un arreglo al agregar, eliminar o reemplazar elementos en una posición específica. Este método puede realizar varias operaciones en un arreglo y tiene la siguiente sintaxis:
+
+array.splice(start, deleteCount, item1, item2, ...)
+
+start: Es el índice en el arreglo donde se comenzará a realizar la operación.
+deleteCount: Es el número de elementos que se eliminarán desde el índice start.
+item1, item2, ...: Son elementos opcionales que se agregarán en el arreglo a partir del índice start. 
+
 */
 
 const products1 = [
@@ -369,8 +374,8 @@ console.log("myProducts", myProducts);
 console.log("-".repeat(10));
 const productIndex = products1.findIndex(item => item.id === '🍔');
     if (productIndex !== -1) {
-        products1.splice(productIndex, 1);
         myProducts.push(products1[productIndex]);
+        products1.splice(productIndex, 1);
     }
 console.log("products", products1);
 console.log("myProducts", myProducts);
@@ -441,52 +446,52 @@ console.log(orders);
 
 
 
-export function simulacion({ satelite, estacion, astronauta, texto }) {
-    satelite.send({
-        from: astronauta,
-        to: estacion,
-        text: texto,
-    });
-    return satelite.messages;
-}
+// export function simulacion({ satelite, estacion, astronauta, texto }) {
+//     satelite.send({
+//         from: astronauta,
+//         to: estacion,
+//         text: texto,
+//     });
+//     return satelite.messages;
+// }
 
-export class Astronaut {
-    constructor({ name }) {
-        this.name = name;
-    }
-}
+// export class Astronaut {
+//     constructor({ name }) {
+//         this.name = name;
+//     }
+// }
 
-export class SpaceStation {
-    constructor({ name }) {
-        this.name = name;
-        this.team = [];
-    }
+// export class SpaceStation {
+//     constructor({ name }) {
+//         this.name = name;
+//         this.team = [];
+//     }
 
-    addTeamMember(newMember) {
-        if (newMember instanceof Astronaut) {
-            this.team.push(newMember.name);
-        }
-    }
-}
+//     addTeamMember(newMember) {
+//         if (newMember instanceof Astronaut) {
+//             this.team.push(newMember.name);
+//         }
+//     }
+// }
 
-export class Satelite {
-    constructor({
-        name,
-    }) {
-        this.name = name;
-        this.messages = [];
-    }
+// export class Satelite {
+//     constructor({
+//         name,
+//     }) {
+//         this.name = name;
+//         this.messages = [];
+//     }
     
-    send({ from, to, text }) {
-        if (from === "Astronauta") {
-            if(SpaceStation.team instanceof SpaceStation) {
+//     send({ from, to, text }) {
+//         if (from === "Astronauta") {
+//             if(SpaceStation.team instanceof SpaceStation) {
 
-                this.messages.push({
-                    from: from.name,
-                    to: to.name,
-                    text: text,
-                });
-            }
-        }
-    }
-}
+//                 this.messages.push({
+//                     from: from.name,
+//                     to: to.name,
+//                     text: text,
+//                 });
+//             }
+//         }
+//     }
+// }

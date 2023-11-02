@@ -139,8 +139,6 @@ class freeStudent extends Student{
             console.warn("lo sentimos,"+ this.name + " solo puedes tomar cursos abiertos");
         }
     }
-
-    p
 }
 
 class BasicStudent extends Student{
@@ -228,7 +226,7 @@ const miguelito2 = new ExpertStudent({
     email: "miguelito@juanito.com",
     instagram: "migelito_feliz",
     learningPaths: [
-        escuelaWeb.courses,
+        escuelaWeb,
         escuelaData,
     ],
 });
