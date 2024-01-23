@@ -1,4 +1,5 @@
 let persona = ["pedro", "manuel", "luisa"]
+persona.push()
 
 console.log(persona);
 
@@ -20,7 +21,7 @@ class miArray {
         return this.data
     }
 
-    pop(){ // delete de last element
+    pop(){ // delete the last element
         let lastItem = this.data[this.length - 1]
         delete this.data[this.length - 1]
         this.length--
@@ -34,7 +35,7 @@ class miArray {
     }
 
     shiftIndex(index) { // delete an item for index
-        for (let i = index; i < this.length; i++) { // [1,2,4,5]
+        for (let i = index; i < this.length - 1; i++) { // [1,2,4,5]
             this.data[i] = this.data[i + 1]         // [1,4,5]
         }
         delete this.data[this.length - 1]
@@ -43,14 +44,24 @@ class miArray {
 
     unshift(item) { // add an item in the beginning of the array
 
-        for (let i = this.length; i > 0; i--) { // ["hola"]  length I
+        if(!item){
+            return this.length;
+        }
+        
+        if(this.length === 0){
+            this.data[0] = item;
+            this.length++;
+            return this.length;
+        }
+        
+        for(let i = this.length; i > 0; i--){
             this.data[i] = this.data[i - 1];
         }
-
+        
         this.data[0] = item;
+    
         this.length++;
-
-        return item;
+        return this.length;
     }
 
 
@@ -76,13 +87,10 @@ class miArray {
 
 const persona2 = new miArray()
 
-persona2.push(1);
-persona2.push(2);
-persona2.push(3);
+persona2.push("jose");
+persona2.push("david");
+persona2.push("ben");
+console.log(persona2.get(2))
 
 console.log(persona2);
-
-
-
-
-
+0

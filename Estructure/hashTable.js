@@ -6,7 +6,7 @@ class HashTable {
         let hash = 0;
         for (let i = 0; i < key.length; i++) {
             hash = (hash + key.charCodeAt(i) * i) % this.data.length;
-        }
+        } 
         return hash;
     }
     set(key, value) {
@@ -30,35 +30,43 @@ class HashTable {
         return undefined;
     }
 
-    remove(key) {
-        const address = this.hashMethod(key);
-        const currentBucket = this.data[address];
+    delete(key){
+        const address = this.hashMethod(key)
+        const currentBucket = this.data[address]
         if (currentBucket) {
             for (let i = 0; i < currentBucket.length; i++) {
                 if (currentBucket[i][0] === key) {
-                    delete currentBucket[i];
+                    let arrDeletedItems = currentBucket.splice(i, 1)
+                    return arrDeletedItems[0];
                 }
             }
-
         }
+        return undefined;
     }
 
-    getKeys(){
+    getAllKeys(){
         let keys = []
         for (let i = 0; i < this.data.length; i++) {
-            let data = this.data[i][0]
-            keys.push(data) 
+            if(this.data[i] != undefined){
+                for(let j = 0; j < this.data[i].length; j++){
+                    keys.push(this.data[i][j][0])
+                }
+            }       
         }
-        
+        return keys
     }
 }
 
 const myHashTable = new HashTable(50)
 
-console.log(myHashTable.hashMethod("david"))
+myHashTable.set("Diego", 1990)
+myHashTable.set("Mariana", 1998)
+myHashTable.set("Miranda", 2000)
+myHashTable.set("Cat", 2010)
 
-const address = myHashTable.hashMethod("haha");
-console.log(address);
+myHashTable.delete("Diego")
 
-if (address){
-}
+
+console.log(myHashTable.getAllKeys())
+
+console.log(myHashTable);
