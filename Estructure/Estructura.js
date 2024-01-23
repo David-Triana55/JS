@@ -93,4 +93,3 @@ persona2.push("ben");
 console.log(persona2.get(2))
 
 console.log(persona2);
-0
