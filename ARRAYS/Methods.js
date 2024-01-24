@@ -352,7 +352,9 @@ array.splice(índice, cantidad, item1, item2, ..., itemN)
 
 El método splice recibe tres argumentos:
 
-El método splice() en JavaScript se utiliza para modificar un arreglo al agregar, eliminar o reemplazar elementos en una posición específica. Este método puede realizar varias operaciones en un arreglo y tiene la siguiente sintaxis:
+El método splice() en JavaScript se utiliza para modificar un arreglo al agregar, 
+eliminar o reemplazar elementos en una posición específica. Este método puede realizar 
+varias operaciones en un arreglo y tiene la siguiente sintaxis:
 
 array.splice(start, deleteCount, item1, item2, ...)
 
@@ -442,56 +444,3 @@ const orders = [
 
 orders.sort()
 console.log(orders);
-
-
-
-
-// export function simulacion({ satelite, estacion, astronauta, texto }) {
-//     satelite.send({
-//         from: astronauta,
-//         to: estacion,
-//         text: texto,
-//     });
-//     return satelite.messages;
-// }
-
-// export class Astronaut {
-//     constructor({ name }) {
-//         this.name = name;
-//     }
-// }
-
-// export class SpaceStation {
-//     constructor({ name }) {
-//         this.name = name;
-//         this.team = [];
-//     }
-
-//     addTeamMember(newMember) {
-//         if (newMember instanceof Astronaut) {
-//             this.team.push(newMember.name);
-//         }
-//     }
-// }
-
-// export class Satelite {
-//     constructor({
-//         name,
-//     }) {
-//         this.name = name;
-//         this.messages = [];
-//     }
-    
-//     send({ from, to, text }) {
-//         if (from === "Astronauta") {
-//             if(SpaceStation.team instanceof SpaceStation) {
-
-//                 this.messages.push({
-//                     from: from.name,
-//                     to: to.name,
-//                     text: text,
-//                 });
-//             }
-//         }
-//     }
-// }
