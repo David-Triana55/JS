@@ -1,0 +1,54 @@
+API es el acrónimo de "Application Programming Interface" (Interfaz de Programación de Aplicaciones). En términos simples, una API es un conjunto de reglas, protocolos y herramientas que permite que diferentes aplicaciones de software se comuniquen entre sí.
+
+Las APIs pueden ser utilizadas por los desarrolladores para acceder a funciones específicas o datos de una aplicación, servicio o plataforma externa sin necesidad de conocer los detalles internos de cómo están implementadas esas funciones o cómo se almacenan los datos. En lugar de eso, la API proporciona una interfaz estandarizada que define cómo se pueden realizar las solicitudes y qué respuestas se pueden esperar.
+
+Hay diferentes tipos de APIs, incluyendo:
+
+1. **APIs web:** Que permiten la comunicación entre aplicaciones a través de Internet utilizando protocolos como HTTP/HTTPS. Las APIs web son comúnmente utilizadas para integrar servicios externos en aplicaciones web y móviles.
+
+2. **APIs de bibliotecas:** Que proporcionan funciones y métodos específicos que pueden ser utilizados por los desarrolladores dentro de su propio código para realizar tareas específicas.
+
+3. **APIs de sistemas operativos:** Que permiten a las aplicaciones acceder a las funciones y recursos del sistema operativo en el que se están ejecutando.
+
+Las APIs son fundamentales en el desarrollo de software moderno, ya que permiten la creación de aplicaciones más modulares, interoperables y escalables al facilitar la integración con sistemas externos y la reutilización de funcionalidades existentes.
+
+
+
+Las API REST (Representational State Transfer) son un estilo de arquitectura para el desarrollo de servicios web que se basa en los principios de REST. Este estilo de arquitectura se centra en la creación de servicios web que son escalables, simples, y fáciles de entender y utilizar.
+
+Las APIs REST utilizan métodos HTTP estándar, como GET, POST, PUT y DELETE, para realizar operaciones en recursos identificados por URLs. Cada recurso es una entidad de datos, y las operaciones se realizan sobre estos recursos utilizando los métodos HTTP adecuados.
+
+Algunas características clave de las APIs REST incluyen:
+
+1. **Recursos:** Los datos se modelan como recursos, que son identificados por URLs únicas.
+
+2. **Operaciones CRUD:** Las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) se realizan sobre los recursos utilizando los métodos HTTP estándar: GET para leer, POST para crear, PUT para actualizar y DELETE para eliminar.
+
+3. **Estado de Representación:** Las respuestas de las operaciones incluyen la representación actual del estado del recurso, generalmente en formato JSON o XML.
+
+4. **Sin estado:** Las APIs REST son sin estado, lo que significa que cada solicitud es independiente y no se almacena ningún estado de sesión en el servidor.
+
+5. **Hipermedia como motor de la aplicación (HATEOAS):** Los recursos pueden contener enlaces a otros recursos relacionados, lo que permite a los clientes navegar por la API de forma dinámica.
+
+Las APIs REST son ampliamente utilizadas en el desarrollo de servicios web debido a su simplicidad, flexibilidad y escalabilidad. Permiten la construcción de sistemas distribuidos que son fáciles de mantener y evolucionar con el tiempo. Además, al utilizar estándares abiertos como HTTP, JSON y XML, las APIs REST son interoperables y pueden ser utilizadas por una amplia variedad de clientes y servidores.
+
+
+HTTP status codes
+
+1XX Respuestas Afirmativas
+
+2XX Respuestas satisfactorias
+
+3XX Re-direcciones
+
+4XX Error del cliente
+
+5XX Error de servidor
+
+
+Metodos HTTPS
+
+GET =  read information
+POST = create information
+PUT & PATCH = edit information & edit puntual information
+DELETE = delete information 
