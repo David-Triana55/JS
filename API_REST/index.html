@@ -10,59 +10,148 @@
             margin: 0;
             box-sizing: border-box;
         }
+
+        nav{
+            width: 100%;
+            height: 50px;
+            background-color: black;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .container-michis{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            justify-items: center;
+            align-content: center;
+            grid-row-gap: 20px;
+            place-items: center;
+        }
         .btn {
-            background-color: blue;
-            width: 200px;
-            height: 30px;
+            background-color: rgb(122, 122, 141);
+            width: 100px;
+            height: 40px;
             border: 0;
             border-radius: 8px;
             color: white;
+            margin-top:20px ;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: 0.4s;
+
+        }
+        .btn:hover{
+            background: transparent;
+            color: black;
+            transition: 0.4s;
+            border: solid 1px black;
         }
         .container-michis{
             width: 100%;
             height: 60%;
         }
-        #photo1, #photo2, #photo3{
-            width: 70%;
-            height: 400px;
+        img{
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-radius: 20px;
+            overflow: hidden;
         }
+        article{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 70%;
+            height: 300px;
+            align-items: center;
+        }
+        #favorites-michis{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            justify-items: center;
+            align-content: center;
+            grid-row-gap: 20px;
+            justify-content: center;
+        }
+        form{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Michis App </h1>
 
-    <span id="error"></span>
+    <nav>
+        <h1 style="color: white;">Michis App </h1>
+    </nav>
 
-    <button id="btn"  class="btn">Reload</button>
 
+    <h2 style="text-align: center; margin-top: 20px;">Gatitos Aleatorios</h2>
     <section class="container-michis">
-        <h2>Gatitos Aleatorios</h2>
-        <article>
-            <img id="photo1" alt="foto de gatos"><br>
-            <button id="btn1" class="btn" onclick="saveFavourites()">guardas michi en favoritos</button>
-
-        </article>
-
-        <article>
-            <img id="photo2" alt="foto de gatos"><br>
-            <button id="btn1" class="btn" onclick="saveFavourites()">guardas michi en favoritos</button>
-
-        </article>
-
-
-    </section>
-
-    <section id="favorites-michis">
-
-        <h2>Gatitos Favoritos</h2>
-
         <article>
             <img id="photo1" alt="foto de gatos">
-            <button id="btn" class="btn">Sacar al michi de favoritos</button>
-
+            <button id="btn1" class="btn">Guardar</button>
         </article>
+
+        <article>
+            <img id="photo2" alt="foto de gatos">
+            <button id="btn2" class="btn">Guardar</button>
+        </article>
+
+        <article>
+            <img id="photo3" alt="foto de gatos">
+            <button id="btn3" class="btn">Guardar</button>
+        </article>
+
+        <article>
+            <img id="photo4" alt="foto de gatos">
+            <button id="btn4" class="btn">Guardar</button>
+        </article>
+
+        <article>
+            <img id="photo5" alt="foto de gatos">
+            <button id="btn5" class="btn">Guardar</button>
+        </article>
+
+        <article>
+            <img id="photo6" alt="foto de gatos">
+            <button id="btn6" class="btn">Guardar</button>
+        </article>
+
+        <article>
+            <img id="photo7" alt="foto de gatos">
+            <button id="btn7" class="btn">Guardar</button>
+        </article>
+
+        <article>
+            <img id="photo8" alt="foto de gatos">
+            <button id="btn8" class="btn">Guardar</button>
+        </article>
+
+    
+    </section>
+    
+    <div style="display: flex; justify-content: center;">
+        <button id="btn"  class="btn">Reload</button>
+    </div>
+
+    
+    <h2>Subir Gatitos</h2>
+    <section id="uploadingMichi">
+        <form id="ulpoadingForm">
+            <input type="file" name="file" id="file"> <br>
+            <button type="button" class="btn" onclick="uploadMichiPhoto()">Sube tu michi</button>
+        </form>
+    </section>
+
+    <h2 style="text-align: center; margin-top: 20px; margin-bottom: 20px;">Michis favoritos </h2>
+    <section id="favorites-michis">
+
+
     </section>
 
     <script src="./main.js"></script>
