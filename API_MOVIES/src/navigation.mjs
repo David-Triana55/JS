@@ -1,5 +1,6 @@
 import { getCategoriesPreview } from "./main.mjs";
 import { getTrendingMovies} from "./main.mjs";
+import {getMoviesByCategory} from "./main.mjs";
 
 import {  headerSection, trendingPreviewSection, categoriesPreviewSection, genericSection, movieDetailSection,searchForm , trendingMoviesPreviewList, categoriesPreviewList, movieDetailCategoriesList, relatedMoviesContainer,headerTitle, arrowBtn, headerCategoryTitle, searchFormInput, searchFormBtn, trendingBtn, movieDetailTitle,movieDetailDescription, movieDetailScore }  from "./node.mjs";
 
@@ -33,6 +34,9 @@ function navigator(){
     } else {
         homePage()
     }
+
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
 }
 
 
@@ -71,6 +75,20 @@ function categoriesPage(){
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
 
+    
+    const [_, category] = location.hash.split("=")
+    const [CategoryId, categoryName] = category.split("-")
+    const [name, complenet] = categoryName.split("%20")
+    console.log(name, complenet);
+
+    if(complenet === undefined){
+        headerCategoryTitle.innerHTML = name
+    } else {
+        headerCategoryTitle.innerHTML = name + " " + complenet
+    }
+
+
+    getMoviesByCategory(CategoryId)
 }
 
 function movieDetailsPage(){
