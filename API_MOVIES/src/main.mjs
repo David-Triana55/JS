@@ -1,4 +1,4 @@
-import { categoriesPreviewList, genericSection, headerCategoryTitle, movieDetailCategoriesList, movieDetailTitle, trendingMoviesPreviewList } from "./node.mjs";
+import { categoriesPreviewList, genericSection, headerCategoryTitle, movieDetailCategoriesList, movieDetailDescription, movieDetailScore, movieDetailTitle, trendingMoviesPreviewList } from "./node.mjs";
 import { API_KEY } from "./secret.mjs";
 
 const api = axios.create({
@@ -115,11 +115,16 @@ export async function getTrendingMovies(){
 }
 
 export async function getMovieById(id){
-    const movie = await api('movie/' + id)
+    const data = await api('movie/' + id)
 
+    
+    const movie = data.data
     console.log(movie);
 
-    movieDetailTitle.textContent = movie.title
+    movieDetailTitle.innerHTML = movie.title
+    movieDetailDescription.innerHTML = movie.overview
+    movieDetailScore.innerHTML = movie.vote_average
+
 
     
 }
