@@ -1,4 +1,4 @@
-import { categoriesPreviewList, genericSection, headerCategoryTitle, trendingMoviesPreviewList } from "./node.mjs";
+import { categoriesPreviewList, genericSection, headerCategoryTitle, movieDetailCategoriesList, movieDetailTitle, trendingMoviesPreviewList } from "./node.mjs";
 import { API_KEY } from "./secret.mjs";
 
 const api = axios.create({
@@ -26,6 +26,10 @@ function createMovies(movies, container){
         
         movieContainer.appendChild(movieImage)
         container.appendChild(movieContainer)
+
+        movieContainer.addEventListener('click', () => {
+            location.hash = `#movie= ${movie.id}`
+        })
     })
 }
 
@@ -57,7 +61,7 @@ function createCategory(categories, container) {
 
 // llamado api
 
-export async function getTrendingMovies(){
+export async function getTrendingMoviesPreview(){
     const { data } = await api('trending/movie/day')
     const movies = data.results
     console.log(movies);
@@ -87,3 +91,35 @@ export async function getMoviesByCategory(id){
 
     createMovies(movies, genericSection)
 } 
+
+
+export async function getMoviesBySearch(query){
+    const {data} = await api("search/movie",{
+        params: {
+            query
+        }
+    })
+
+    const movies = data.results
+
+    createMovies(movies, genericSection)
+}
+
+
+export async function getTrendingMovies(){
+    const {data} = await api("trending/movie/day")
+
+    const movies = data.results
+
+    createMovies(movies, genericSection)
+}
+
+export async function getMovieById(id){
+    const movie = await api('movie/' + id)
+
+    console.log(movie);
+
+    movieDetailTitle.textContent = movie.title
+
+    
+}

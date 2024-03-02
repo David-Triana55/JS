@@ -1,11 +1,14 @@
-import { getCategoriesPreview } from "./main.mjs";
-import { getTrendingMovies} from "./main.mjs";
+import { getCategoriesPreview, getTrendingMoviesPreview } from "./main.mjs";
 import {getMoviesByCategory} from "./main.mjs";
+import { getMoviesBySearch} from "./main.mjs";
+import { getTrendingMovies} from "./main.mjs";
+import { getMovieById} from "./main.mjs";
 
 import {  headerSection, trendingPreviewSection, categoriesPreviewSection, genericSection, movieDetailSection,searchForm , trendingMoviesPreviewList, categoriesPreviewList, movieDetailCategoriesList, relatedMoviesContainer,headerTitle, arrowBtn, headerCategoryTitle, searchFormInput, searchFormBtn, trendingBtn, movieDetailTitle,movieDetailDescription, movieDetailScore }  from "./node.mjs";
 
 searchFormBtn.addEventListener("click", () => {
-    location.hash = "#search="
+    location.hash = "#search=" + searchFormInput.value
+
 })
 
 
@@ -14,10 +17,11 @@ trendingBtn.addEventListener("click", () => {
 });
 
 arrowBtn.addEventListener("click", () => {
-    location.hash = "#home"
+    // location.hash = "#home"
+    history.back(); // mirar el historial y volver a la pagina anterior
 });
 
-window.addEventListener('DOMContentLoaded', navigator, false); 
+window.addEventListener('DOMContentLoaded', navigator, false); // carfar el contenido de dom
 window.addEventListener('hashchange', navigator, false);
 
 function navigator(){
@@ -29,13 +33,13 @@ function navigator(){
         searchPage()
     } else if(location.hash.startsWith('#movie=')){
         movieDetailsPage()
-    } else if (location.hash.startsWith('#category=')){
+    } else if (location.hash.startsWith('#category=')){ // location empieza con movie=
         categoriesPage()
     } else {
         homePage()
     }
 
-    document.body.scrollTop = 0
+    document.body.scrollTop = 0  // que el contenido se abra y permanezca arriba
     document.documentElement.scrollTop = 0
 }
 
@@ -56,7 +60,7 @@ function homePage(){
     movieDetailSection.classList.add('inactive')
 
     getCategoriesPreview()
-    getTrendingMovies()
+    getTrendingMoviesPreview()
 }
 
 function categoriesPage(){
@@ -107,6 +111,12 @@ function movieDetailsPage(){
     genericSection.classList.add('inactive')
     movieDetailSection.classList.remove('inactive')
 
+    const [_ ,id] = location.hash.split('%')
+
+    const [a,movieId] = id.split('20')
+    console.log(movieId);
+    getMovieById(movieId)
+
 }
 
 function searchPage(){
@@ -117,14 +127,20 @@ function searchPage(){
     arrowBtn.classList.remove('inactive')
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.add('inactive')
-    headerCategoryTitle.classList.remove('inactive')
-    searchForm.classList.add('inactive')
+    headerCategoryTitle.classList.add('inactive')
+    searchForm.classList.remove('inactive')
 
     trendingPreviewSection.classList.add('inactive')
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
 
+
+    const [_, query] = location.hash.split("=")
+
+    console.log(query);
+
+    getMoviesBySearch(query)
 
 }
 
@@ -137,11 +153,14 @@ function trendsPage(){
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.add('inactive')
     headerCategoryTitle.classList.remove('inactive')
-    searchForm.classList.remove('inactive')
+    headerCategoryTitle.innerHTML = 'Tendencias'
+    searchForm.classList.add('inactive')
 
     trendingPreviewSection.classList.add('inactive')
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
+
+    getTrendingMovies()
 
 }
