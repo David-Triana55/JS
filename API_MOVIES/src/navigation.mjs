@@ -11,7 +11,6 @@ searchFormBtn.addEventListener("click", () => {
 
 })
 
-
 trendingBtn.addEventListener("click", () => {
     location.hash = "#trends"
 });
@@ -42,7 +41,6 @@ function navigator(){
     document.body.scrollTop = 0  // que el contenido se abra y permanezca arriba
     document.documentElement.scrollTop = 0
 }
-
 
 function homePage(){
 
@@ -94,7 +92,6 @@ function categoriesPage(){
         headerCategoryTitle.innerHTML = name + " " + complenet
     }
 
-
     getMoviesByCategory(CategoryId)
 }
 
@@ -119,9 +116,7 @@ function movieDetailsPage(){
     const [a,movieId] = id.split('20')
     console.log(movieId);
     getMovieById(movieId)
-
     getRelatedMoviesId(movieId)
-
 }
 
 function searchPage(){
@@ -129,6 +124,8 @@ function searchPage(){
 
     headerSection.classList.remove('header-container--long')
     headerSection.style.backgroundColor = ''
+    headerSection.style.backgroundImage = ''
+
     arrowBtn.classList.remove('inactive')
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.add('inactive')
@@ -139,7 +136,6 @@ function searchPage(){
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
-
 
     const [_, query] = location.hash.split("=")
 
@@ -154,6 +150,8 @@ function trendsPage(){
 
     headerSection.classList.remove('header-container--long')
     headerSection.style.backgroundColor = ''
+    headerSection.style.backgroundImage = ''
+
     arrowBtn.classList.remove('inactive')
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.add('inactive')
@@ -167,5 +165,4 @@ function trendsPage(){
     movieDetailSection.classList.add('inactive')
 
     getTrendingMovies()
-
 }

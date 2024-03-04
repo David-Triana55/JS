@@ -35,7 +35,6 @@ function createMovies(movies, container){
 
 function createCategory(categories, container) {
 
-
     container.innerHTML = ""
     categories.forEach(category => {
 
@@ -58,7 +57,6 @@ function createCategory(categories, container) {
     })
 }
 
-
 // llamado api
 
 export async function getTrendingMoviesPreview(){
@@ -76,8 +74,6 @@ export async function getCategoriesPreview(){
 
     createCategory(categories, categoriesPreviewList)
 }
-
-
 
 export async function getMoviesByCategory(id){
     const {data} = await api(`discover/movie`,{
@@ -105,18 +101,15 @@ export async function getMoviesBySearch(query){
     createMovies(movies, genericSection)
 }
 
-
 export async function getTrendingMovies(){
     const {data} = await api("trending/movie/day")
 
     const movies = data.results
-
     createMovies(movies, genericSection)
 }
 
 export async function getMovieById(id){
     const data = await api('movie/' + id)
-
     
     const movie = data.data
     console.log(movie);
@@ -124,8 +117,6 @@ export async function getMovieById(id){
     const fondo = document.querySelector(".header-container--long")
 
     const movieUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-
-
     fondo.style.background = 
     `
     linear-gradient(
@@ -143,13 +134,10 @@ export async function getMovieById(id){
     createCategory(movie.genres, movieDetailCategoriesList)
 }
 
-
 export async function getRelatedMoviesId(id) {
     const {data} = await api(`movie/${id}/recommendations`)
     const movies = data.results
     console.log(movies);
 
     createMovies(movies,relatedMoviesContainer )
-
 }
-
