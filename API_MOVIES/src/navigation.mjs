@@ -1,4 +1,4 @@
-import { getCategoriesPreview, getTrendingMoviesPreview } from "./main.mjs";
+import { getCategoriesPreview, getRelatedMoviesId, getTrendingMoviesPreview } from "./main.mjs";
 import {getMoviesByCategory} from "./main.mjs";
 import { getMoviesBySearch} from "./main.mjs";
 import { getTrendingMovies} from "./main.mjs";
@@ -46,8 +46,9 @@ function navigator(){
 
 function homePage(){
 
+    headerSection.style.backgroundColor = ' '
+    headerSection.style.backgroundImage = ''
     headerSection.classList.remove('header-container--long')
-    headerSection.style.backgroundColor = ''
     arrowBtn.classList.add('inactive')
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.remove('inactive')
@@ -68,6 +69,8 @@ function categoriesPage(){
 
     headerSection.classList.remove('header-container--long')
     headerSection.style.backgroundColor = ''
+    headerSection.style.backgroundImage = ''
+
     arrowBtn.classList.remove('inactive')
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.add('inactive')
@@ -116,6 +119,8 @@ function movieDetailsPage(){
     const [a,movieId] = id.split('20')
     console.log(movieId);
     getMovieById(movieId)
+
+    getRelatedMoviesId(movieId)
 
 }
 

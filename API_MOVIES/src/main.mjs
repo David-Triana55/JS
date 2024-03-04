@@ -1,4 +1,4 @@
-import { categoriesPreviewList, genericSection, headerCategoryTitle, movieDetailCategoriesList, movieDetailDescription, movieDetailScore, movieDetailTitle, trendingMoviesPreviewList } from "./node.mjs";
+import { categoriesPreviewList, genericSection, headerCategoryTitle, headerSection, movieDetailCategoriesList, movieDetailDescription, movieDetailScore, movieDetailTitle, relatedMoviesContainer, trendingMoviesPreviewList } from "./node.mjs";
 import { API_KEY } from "./secret.mjs";
 
 const api = axios.create({
@@ -121,10 +121,35 @@ export async function getMovieById(id){
     const movie = data.data
     console.log(movie);
 
+    const fondo = document.querySelector(".header-container--long")
+
+    const movieUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+
+
+    fondo.style.background = 
+    `
+    linear-gradient(
+        180deg, 
+        rgba(0, 0, 0, 0.35) 19.27%, 
+        rgba(0, 0, 0, 0) 29.17%
+        ),
+
+    url(${movieUrl})`
+
     movieDetailTitle.innerHTML = movie.title
     movieDetailDescription.innerHTML = movie.overview
-    movieDetailScore.innerHTML = movie.vote_average
+    movieDetailScore.innerHTML = movie.vote_average.toFixed(1)
 
-
-    
+    createCategory(movie.genres, movieDetailCategoriesList)
 }
+
+
+export async function getRelatedMoviesId(id) {
+    const {data} = await api(`movie/${id}/recommendations`)
+    const movies = data.results
+    console.log(movies);
+
+    createMovies(movies,relatedMoviesContainer )
+
+}
+
