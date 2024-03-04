@@ -129,6 +129,8 @@ function searchPage(){
 
     headerSection.classList.remove('header-container--long')
     headerSection.style.backgroundColor = ''
+    headerSection.style.backgroundImage = ''
+
     arrowBtn.classList.remove('inactive')
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.add('inactive')
@@ -154,6 +156,8 @@ function trendsPage(){
 
     headerSection.classList.remove('header-container--long')
     headerSection.style.backgroundColor = ''
+    headerSection.style.backgroundImage = ''
+
     arrowBtn.classList.remove('inactive')
     arrowBtn.classList.remove('header-arrow--white')
     headerTitle.classList.add('inactive')
