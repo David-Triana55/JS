@@ -12,25 +12,56 @@ const api = axios.create({
 })
 // utils
 
-function createMovies(movies, container){
-    container.innerHTML = ""
-    movies.forEach(movie => {
+const laziLoader = new IntersectionObserver((entries) => { 
+    entries.forEach((entry) => {
+        if(entry.isIntersecting){
+            const URL = entry.target.getAttribute('data-img')
+            entry.target.setAttribute('src' , URL);
+        }
+    });
+}) // observar la interseccion y mostrar los elementos que esten en ella para la optimizacion
 
-        const movieContainer = document.createElement('div')
-        movieContainer.classList.add('movie-container')
+console.log(laziLoader);
 
-        const movieImage = document.createElement('img')
-        movieImage.classList.add('movie-img')
-        movieImage.setAttribute('alt', movie.title)
-        movieImage.setAttribute('src', `https://image.tmdb.org/t/p/w300${movie.poster_path}`)
+function createMovies(movies, container, 
+    { 
+        lazyLoad = false,
+        clean = true 
+    } = {},
+) {
         
-        movieContainer.appendChild(movieImage)
-        container.appendChild(movieContainer)
+        if(clean) {
+            container.innerHTML = ""
+        }
 
-        movieContainer.addEventListener('click', () => {
-            location.hash = `#movie= ${movie.id}`
+
+        movies.forEach(movie => {
+
+            const movieContainer = document.createElement('div')
+            movieContainer.classList.add('movie-container')
+
+            const movieImage = document.createElement('img')
+            movieImage.classList.add('movie-img')
+            movieImage.setAttribute('alt', movie.title)
+            movieImage.setAttribute( lazyLoad ? 'data-img' : 'src', `https://image.tmdb.org/t/p/w300${movie.poster_path}`)
+
+
+            movieImage.addEventListener('error', () => {
+                movieContainer.remove()
+                movieImage.style.display= "none";
+            })
+
+            if(lazyLoad){
+                laziLoader.observe(movieImage)
+            }
+
+            movieContainer.appendChild(movieImage)
+            container.appendChild(movieContainer)
+
+            movieContainer.addEventListener('click', () => {
+                location.hash = `#movie= ${movie.id}`
+            })
         })
-    })
 }
 
 function createCategory(categories, container) {
@@ -64,7 +95,7 @@ export async function getTrendingMoviesPreview(){
     const movies = data.results
     console.log(movies);
 
-    createMovies(movies, trendingMoviesPreviewList)
+    createMovies(movies, trendingMoviesPreviewList, {laziLoad : true} )
 }
 
 export async function getCategoriesPreview(){
@@ -72,7 +103,7 @@ export async function getCategoriesPreview(){
     const categories = data.genres
     console.log(categories);
 
-    createCategory(categories, categoriesPreviewList)
+    createCategory(categories, categoriesPreviewList, {laziLoad : true})
 }
 
 export async function getMoviesByCategory(id){
@@ -85,7 +116,7 @@ export async function getMoviesByCategory(id){
     const movies = data.results
     console.log(movies);
 
-    createMovies(movies, genericSection)
+    createMovies(movies, genericSection, true)
 } 
 
 
@@ -105,7 +136,30 @@ export async function getTrendingMovies(){
     const {data} = await api("trending/movie/day")
 
     const movies = data.results
-    createMovies(movies, genericSection)
+    createMovies(movies, genericSection, {lazyLoad: true, clean: true})
+}
+
+window.addEventListener('scroll', getPanigedTrendingMovies)
+
+let page = 1
+
+async function getPanigedTrendingMovies(){
+    const { scrollTop, scrollHeight, clientHeight} = document.documentElement
+
+    const isScrollBottom = (scrollTop + clientHeight) >= scrollHeight - 15
+    
+    if(isScrollBottom) {
+        page++
+        const {data} = await api("trending/movie/day", {
+            params: {
+                page
+            }
+        })
+        
+        const movies = data.results
+        createMovies(movies, genericSection, {lazyLoad: true, clean: false})
+    }
+
 }
 
 export async function getMovieById(id){
@@ -139,5 +193,5 @@ export async function getRelatedMoviesId(id) {
     const movies = data.results
     console.log(movies);
 
-    createMovies(movies,relatedMoviesContainer )
+    createMovies(movies,relatedMoviesContainer , true)
 }
