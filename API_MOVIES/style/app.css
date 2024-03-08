@@ -89,20 +89,21 @@ button {
 
 
 /* Shared */
-.header-container, .trendingPreview-header, .categoriesPreview-container {
+.header-container, .trendingPreview-header, .categoriesPreview-container, .liked-header {
     padding: 0 24px;
 }
 
-.trendingPreview-container, .categoriesPreview-container, footer {
+.trendingPreview-container, .categoriesPreview-container, .liked-container, footer {
     margin-top: 48px;
 }
 
-.trendingPreview-header, .categoriesPreview-title {
+.trendingPreview-header, .categoriesPreview-title, .liked-header {
     margin-bottom: 24px;
 }
 
 .movie-container {
     cursor: pointer;
+    position: relative;
 }
 
 .movie-img {
@@ -110,6 +111,32 @@ button {
     min-height: 150px;
     height: 268px;
     margin-bottom: 5px !important;
+}
+
+.movie-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.movie-btn::before{
+    content: '🤍';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-btn--liked {
+    background-color: wheat;
+    box-shadow: 0px 0px 10px 2px var(--black-dark-2);
+}
+
+.movie-btn--liked::before{
+    content: '❤️';
 }
 
 .categoriesPreview-list, .categories-list {
@@ -234,7 +261,7 @@ button {
     width: 72px;
 }
 
-.trendingPreview-movieList {
+.trendingPreview-movieList, .liked-movieList {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -243,12 +270,12 @@ button {
     padding-bottom: 16px;
 }
 
-.trendingPreview-movieList .movie-container {
+.trendingPreview-movieList .movie-container, .liked-movieList .movie-container {
     display: inline-block;
     margin-right: 8px;
 }
 
-.trendingPreview-movieList .movie-container .movie-img {
+.trendingPreview-movieList .movie-container .movie-img,  .liked-movieList .movie-container .movie-img{
     height: 225px;
     min-height: 225px;
     max-height: 225px;

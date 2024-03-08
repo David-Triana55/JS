@@ -1,5 +1,8 @@
-import { categoriesPreviewList, genericSection, headerCategoryTitle, headerSection, movieDetailCategoriesList, movieDetailDescription, movieDetailScore, movieDetailTitle, relatedMoviesContainer, trendingMoviesPreviewList } from "./node.mjs";
+import { categoriesPreviewList, genericSection, headerCategoryTitle, headerSection, likedContainer, movieDetailCategoriesList, movieDetailDescription, movieDetailScore, movieDetailTitle, relatedMoviesContainer, trendingMoviesPreviewList, likedMovieList } from "./node.mjs";
 import { API_KEY } from "./secret.mjs";
+
+let page = 1
+let maxPage;
 
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
@@ -10,6 +13,38 @@ const api = axios.create({
         "api_key": API_KEY
     }
 })
+
+function likedMoviesList(){
+    const item = JSON.parse(localStorage.getItem('liked_movies'))
+    let movies
+
+    if(item){
+        movies = item
+    } else {
+        movies = {}
+    }
+
+    return movies
+}
+
+function likeMovie(movie){
+
+    console.log(movie);
+    const likedMovies = likedMoviesList();
+    console.log(likedMovies);
+
+    if(likedMovies[movie.id]){
+        likedMovies[movie.id] = undefined
+    } else {
+        likedMovies[movie.id] = movie
+        console.log(likedMovies[movie.id] = movie);
+    }
+
+    localStorage.setItem('liked_movies',JSON.stringify(likedMovies))
+    getMoviesFavorites()
+    getTrendingMoviesPreview();
+}
+
 // utils
 
 const laziLoader = new IntersectionObserver((entries) => { 
@@ -34,7 +69,6 @@ function createMovies(movies, container,
             container.innerHTML = ""
         }
 
-
         movies.forEach(movie => {
 
             const movieContainer = document.createElement('div')
@@ -44,6 +78,14 @@ function createMovies(movies, container,
             movieImage.classList.add('movie-img')
             movieImage.setAttribute('alt', movie.title)
             movieImage.setAttribute( lazyLoad ? 'data-img' : 'src', `https://image.tmdb.org/t/p/w300${movie.poster_path}`)
+
+            const btnMovie = document.createElement('button')
+            btnMovie.classList.add('movie-btn')
+            likedMoviesList()[movie.id] && btnMovie.classList.add('movie-btn--liked')
+            btnMovie.addEventListener('click', () =>{
+                btnMovie.classList.toggle('movie-btn--liked')
+                likeMovie(movie)
+            })
 
 
             movieImage.addEventListener('error', () => {
@@ -55,10 +97,11 @@ function createMovies(movies, container,
                 laziLoader.observe(movieImage)
             }
 
+            movieContainer.appendChild(btnMovie)
             movieContainer.appendChild(movieImage)
             container.appendChild(movieContainer)
 
-            movieContainer.addEventListener('click', () => {
+            movieImage.addEventListener('click', () => {
                 location.hash = `#movie= ${movie.id}`
             })
         })
@@ -114,10 +157,33 @@ export async function getMoviesByCategory(id){
     })
 
     const movies = data.results
+    maxPage = data.total_pages
     console.log(movies);
 
-    createMovies(movies, genericSection, true)
+    createMovies(movies, genericSection, {lazyLoad: true})
 } 
+
+export function getPanigedMoviesByCategory(id){
+    return async function () {
+        const { scrollTop, scrollHeight, clientHeight} = document.documentElement
+
+        const isScrollBottom = (scrollTop + clientHeight) >= (scrollHeight - 15)
+
+        const pageIsNotMax = page < maxPage
+
+        if(isScrollBottom && pageIsNotMax) {
+            page++
+            const {data} = await api(`discover/movie`,{
+                params: {
+                    with_genres: id,
+                    page
+                }
+            })
+            const movies = data.results
+            createMovies(movies, genericSection, {lazyLoad: true, clean: false})
+        }
+    }
+}
 
 
 export async function getMoviesBySearch(query){
@@ -128,27 +194,52 @@ export async function getMoviesBySearch(query){
     })
 
     const movies = data.results
+    console.log(movies);
+    maxPage = data.total_pages
 
     createMovies(movies, genericSection)
 }
 
+export  function getPanigedMoviesBySearch(query){
+    return async function () {
+        const { scrollTop, scrollHeight, clientHeight} = document.documentElement
+
+        const isScrollBottom = (scrollTop + clientHeight) >= (scrollHeight - 15)
+
+        const pageIsNotMax = page < maxPage
+        console.log(page);
+
+        if(isScrollBottom && pageIsNotMax) {
+            page++
+            const {data} = await api("search/movie",{
+                params: {
+                    query,
+                    page
+                }
+            })        
+            const movies = data.results
+            createMovies(movies, genericSection, {lazyLoad: true, clean: false})
+        }
+    }
+}
+
 export async function getTrendingMovies(){
     const {data} = await api("trending/movie/day")
+    maxPage = data.total_pages
 
     const movies = data.results
     createMovies(movies, genericSection, {lazyLoad: true, clean: true})
 }
 
-window.addEventListener('scroll', getPanigedTrendingMovies)
-
-let page = 1
-
-async function getPanigedTrendingMovies(){
+export async function getPanigedTrendingMovies(){
     const { scrollTop, scrollHeight, clientHeight} = document.documentElement
 
-    const isScrollBottom = (scrollTop + clientHeight) >= scrollHeight - 15
-    
-    if(isScrollBottom) {
+    const isScrollBottom = (scrollTop + clientHeight) >= (scrollHeight - 15)
+
+    const pageIsNotMax = page < maxPage
+    console.log(page);
+
+    if(isScrollBottom && pageIsNotMax) {
         page++
         const {data} = await api("trending/movie/day", {
             params: {
@@ -194,4 +285,13 @@ export async function getRelatedMoviesId(id) {
     console.log(movies);
 
     createMovies(movies,relatedMoviesContainer , true)
+}
+
+export function getMoviesFavorites(){
+    const likeMovies = likedMoviesList()
+    const movieArray = Object.values(likeMovies)
+
+    createMovies(movieArray, likedMovieList , {lazyLoad: true, clean: true} )
+
+    console.log(movieArray);
 }

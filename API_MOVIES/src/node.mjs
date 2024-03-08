@@ -17,3 +17,6 @@ export const trendingBtn = document.querySelector('.trendingPreview-btn');
 export const movieDetailTitle = document.querySelector('.movieDetail-title');
 export const movieDetailDescription = document.querySelector('.movieDetail-description');
 export const movieDetailScore = document.querySelector('.movieDetail-score');
+
+export const likedContainer = document.querySelector('.liked-container');
+export const likedMovieList = document.querySelector('.liked-movieList');

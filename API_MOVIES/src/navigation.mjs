@@ -1,10 +1,8 @@
-import { getCategoriesPreview, getRelatedMoviesId, getTrendingMoviesPreview } from "./main.mjs";
-import {getMoviesByCategory} from "./main.mjs";
-import { getMoviesBySearch} from "./main.mjs";
-import { getTrendingMovies} from "./main.mjs";
-import { getMovieById} from "./main.mjs";
+import { getCategoriesPreview, getRelatedMoviesId, getTrendingMoviesPreview, getPanigedTrendingMovies, getPanigedMoviesBySearch, getPanigedMoviesByCategory, getMoviesFavorites, getMoviesByCategory, getMoviesBySearch,getTrendingMovies,getMovieById} from "./main.mjs";
 
-import {  headerSection, trendingPreviewSection, categoriesPreviewSection, genericSection, movieDetailSection,searchForm , trendingMoviesPreviewList, categoriesPreviewList, movieDetailCategoriesList, relatedMoviesContainer,headerTitle, arrowBtn, headerCategoryTitle, searchFormInput, searchFormBtn, trendingBtn, movieDetailTitle,movieDetailDescription, movieDetailScore }  from "./node.mjs";
+import {  headerSection, trendingPreviewSection, categoriesPreviewSection, genericSection, movieDetailSection,searchForm , trendingMoviesPreviewList, categoriesPreviewList, movieDetailCategoriesList, relatedMoviesContainer,headerTitle, arrowBtn, headerCategoryTitle, searchFormInput, searchFormBtn, trendingBtn, movieDetailTitle,movieDetailDescription, movieDetailScore, likedContainer }  from "./node.mjs";
+
+let infiniteScroll
 
 searchFormBtn.addEventListener("click", () => {
     location.hash = "#search=" + searchFormInput.value
@@ -22,9 +20,15 @@ arrowBtn.addEventListener("click", () => {
 
 window.addEventListener('DOMContentLoaded', navigator, false); // carfar el contenido de dom
 window.addEventListener('hashchange', navigator, false);
+window.addEventListener('scroll', infiniteScroll, { passive: false });
 
 function navigator(){
     console.log({location});
+
+    if(infiniteScroll){
+        window.removeEventListener('scroll', infiniteScroll, {passive: false});
+        infiniteScroll = undefined
+    }
 
     if(location.hash.startsWith('#trends')){
         trendsPage()
@@ -40,6 +44,10 @@ function navigator(){
 
     document.body.scrollTop = 0  // que el contenido se abra y permanezca arriba
     document.documentElement.scrollTop = 0
+
+    if(infiniteScroll){
+        window.addEventListener('scroll', infiniteScroll, {passive: false})
+    }
 }
 
 function homePage(){
@@ -57,9 +65,11 @@ function homePage(){
     categoriesPreviewSection.classList.remove('inactive')
     genericSection.classList.add('inactive')
     movieDetailSection.classList.add('inactive')
+    likedContainer.classList.remove('inactive')
 
     getCategoriesPreview()
     getTrendingMoviesPreview()
+    getMoviesFavorites()
 }
 
 function categoriesPage(){
@@ -79,6 +89,8 @@ function categoriesPage(){
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
+    likedContainer.classList.add('inactive')
+
 
     
     const [_, category] = location.hash.split("=")
@@ -93,6 +105,8 @@ function categoriesPage(){
     }
 
     getMoviesByCategory(CategoryId)
+
+    infiniteScroll = getPanigedMoviesByCategory(CategoryId)
 }
 
 function movieDetailsPage(){
@@ -110,6 +124,8 @@ function movieDetailsPage(){
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.add('inactive')
     movieDetailSection.classList.remove('inactive')
+    likedContainer.classList.add('inactive')
+
 
     const [_ ,id] = location.hash.split('%')
 
@@ -136,12 +152,16 @@ function searchPage(){
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
+    likedContainer.classList.add('inactive')
+
 
     const [_, query] = location.hash.split("=")
 
     console.log(query);
 
     getMoviesBySearch(query)
+
+    infiniteScroll = getPanigedMoviesBySearch(query)
 
 }
 
@@ -163,6 +183,10 @@ function trendsPage(){
     categoriesPreviewSection.classList.add('inactive')
     genericSection.classList.remove('inactive')
     movieDetailSection.classList.add('inactive')
+    likedContainer.classList.add('inactive')
+
 
     getTrendingMovies()
+
+    infiniteScroll = getPanigedTrendingMovies
 }
