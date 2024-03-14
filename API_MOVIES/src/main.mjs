@@ -11,7 +11,6 @@ const api = axios.create({
     },
     params: {
         "api_key": API_KEY,
-        "language": navigator.language || "es-ES"
     }
 })
 
@@ -33,6 +32,7 @@ function likeMovie(movie){
     console.log(movie);
     const likedMovies = likedMoviesList();
     console.log(likedMovies);
+
 
     if(likedMovies[movie.id]){
         likedMovies[movie.id] = undefined
@@ -292,7 +292,13 @@ export function getMoviesFavorites(){
     const likeMovies = likedMoviesList()
     const movieArray = Object.values(likeMovies)
 
+    if(movieArray.length === 0){
+        likedContainer.classList.add('inactive')
+    } else {
+        likedContainer.classList.remove('inactive')
+    }
+
     createMovies(movieArray, likedMovieList , {lazyLoad: true, clean: true} )
 
-    console.log(movieArray);
+    console.log(movieArray,' moviesFavorites');
 }
