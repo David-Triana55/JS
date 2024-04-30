@@ -1,4 +1,4 @@
-1. **Proyecto de Películas:**
+### Proyectos de peliculas
    - Este proyecto es una aplicación web creada con JavaScript Vanilla que permite a los usuarios explorar información sobre películas. Se integra una API de películas para obtener datos actualizados sobre películas populares, detalles de películas específicas, reseñas y más.
    - La aplicación utiliza la navegación por hash para permitir a los usuarios compartir enlaces directos a páginas específicas de películas o categorías de películas.
    - Los usuarios pueden navegar por diferentes categorías de películas, buscar películas específicas y visualizar detalles de películas individuales, lo que proporciona una experiencia completa de exploración cinematográfica.
