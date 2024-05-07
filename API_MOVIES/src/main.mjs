@@ -36,6 +36,7 @@ function likeMovie(movie){
 
     if(likedMovies[movie.id]){
         likedMovies[movie.id] = undefined
+        console.log(likedMovies[movie.id], 'es porque ya exite');
     } else {
         likedMovies[movie.id] = movie
         console.log(likedMovies[movie.id] = movie);
@@ -208,7 +209,7 @@ export  function getPanigedMoviesBySearch(query){
         const isScrollBottom = (scrollTop + clientHeight) >= (scrollHeight - 15)
 
         const pageIsNotMax = page < maxPage
-        console.log(page);
+        console.log(page, maxPage);
 
         if(isScrollBottom && pageIsNotMax) {
             page++
